@@ -1,33 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <!-- Logo brand -->
-        <img src="img/logo.bmp">
+        <section class="container text-uppercase">
+            <img class="float-left" src="img/logo.bmp" alt="Dumb Starbucks Cofee logo">
+            <h1 class="font-weight-normal">Dumb</h1>
+            <h2 class="display-4">Starbucks coffee</h2>
+        </section>
     </header>
 
-    <section>
-        <!-- Title -->
-        <h1>N&aring;r du har tid</h1>
-
-        <!-- Sub title -->
-        <para>Hos <span>Dumb starbucks</span> tilbyder vi den bedste kaffe n&aring;r du har tid. Bestil nu og kom ind og drik den når du har tid.</para>
+    <section class="text-center">
+        <div class="container pt-5">
+            <h1>N&aring;r du har tid</h1>
+            <p class="font-weight-light">Hos
+                <span class="text-uppercase">Dumb starbucks</span> tilbyder vi den bedste kaffe n&aring;r du har tid. Bestil nu og kom ind og drik den
+                når du har tid.</p>
+        </div>
     </section>
 
-    <main>
+    <main class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="products col-lg-8">
+                    <div class="row" id="product-list">
+                        <article class="col-lg-6 product-list-item">
+                            <div class="card">
+                                <img class="card-img-top" src="img/Americano.jpg" alt="coffee picture">
+                                <div class="card-body">
+                                    <h4 class="card-title">Americano</h4>
+                                    <p class="card-text">Stærk crema espresso med varmt vand.</p>
 
+                                    <div class="row container pr-0">
+                                        <div class="col-sm p-0">
+                                            <button class="product-purchase-btn btn btn-outline-secondary">Bestil</button>
+                                        </div>
+
+                                        <p class="col-sm p-0 text-right my-auto product-price">0kr</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <section class="checkout col-lg-4">
+                    <div class="row">
+                        <h1 class="col-sm text-secondary">Bestilling</h1>
+
+                        <div class="col-sm text-right my-auto">
+                            <p class="m-0 py-1 px-2 badge badge-pill badge-secondary">0</p>
+                        </div>
+                    </div>
+
+                    <ul class="list-group mt-2" id="checkout-list">
+                        <li class="list-group-item checkout-list-item">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p class="font-weight-bold my-1">|Product name|</p>
+                                </div>
+
+                                <div class="col-sm">
+                                    <p class="text-right my-1">0kr</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item checkout-list-item">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p class="my-1">Total (DKK)</p>
+                                </div>
+
+                                <div class="col-sm">
+                                    <p class="font-weight-bold text-right my-1">0kr</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
     </main>
 
+    <footer class="p-3 text-center border-top">
+            <p class="m-0 text-uppercase text-secondary">&copy; 2017-2018 Dumb starbucks coffee</p>
+            <a href="#" class="text-success">Nathan for you</a>
+    </footer>
+
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
