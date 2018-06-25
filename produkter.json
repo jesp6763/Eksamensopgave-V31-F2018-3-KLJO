@@ -15,7 +15,7 @@
         "navn" : "Cappuccino",
         "beskrivelse" : "Espresso med dampet mælk og skum",
         "pris" : "75kr",
-        "img" : "Cappucino.jpg"
+        "img" : "Cappuccino.jpg"
     },
     "coffee4": {
         "navn" : "Espresso",
