@@ -3,8 +3,6 @@
  */
 class ProductCard {
     constructor(product) {
-        ProductList.rootElement.insertAdjacentHTML('beforeend', ProductCard._GenerateHTMLElement(product));
-
         // Store the root element
         let productListItems = document.getElementsByClassName('product-list-item');
         this.rootElement = productListItems[productListItems.length - 1];
@@ -17,20 +15,32 @@ class ProductCard {
         Checkout.Add(Product.Instances[this.representedProduct]);
     }
 
-    static CreateElements(productInstances) {
+    /**
+     * Creates a product card for each specified product in the given instances list, in the specified parent.
+     * @param {HTMLElement} parent The element to create the product card in.
+     * @param {Map<string, Product>} products A map of product instances.
+     */
+    static CreateCards(parent, products) {
         let productCardInstances = [],
-        keys = Object.keys(productInstances);
+        keys = Object.keys(products);
 
         keys.forEach((key, index) => {
-            productCardInstances[index] = new ProductCard(productInstances[key]);
+            productCardInstances[index] = new ProductCard(products[key]);
+
+            // Insert the product card before the parent's end tag
+            parent.insertAdjacentHTML('beforeend', this._GenerateHTMLElement(products[key]));
         });
 
         return productCardInstances;
     }
 
+    /**
+     * Generates the HTML code for the product, and then returns it.
+     * @param {Product} product The product to get the information from.
+     */
     static _GenerateHTMLElement(product) {
         return `
-        <article class="col-lg-6 product-list-item">
+        <article class="col-12 col-sm-6 mb-4 product-list-item">
             <div class="card">
                 <img class="card-img-top" src="img/${product.img}" alt="coffee picture">
                 <div class="card-body">
@@ -38,11 +48,11 @@ class ProductCard {
                     <p class="card-text">${product.description}</p>
 
                     <div class="row container pr-0">
-                        <div class="col-sm p-0">
+                        <div class="col-6 p-0">
                             <button class="product-purchase-btn btn btn-outline-secondary" data-id="${product.id}">Bestil</button>
                         </div>
 
-                        <p class="col-sm p-0 text-right my-auto product-price">${product.price}kr</p>
+                        <p class="col-6 p-0 text-right my-auto product-price">${product.price}kr</p>
                     </div>
                 </div>
             </div>

@@ -2,11 +2,15 @@
  * Represents a product list view.
  */
 class ProductList{
+    /**
+     * Sets up the product list.
+     * Loading products.
+     */
     static Setup(){
         this.rootElement = document.getElementById('product-list');
 
         // Populate with products, and store the instances
-        this.ProductCardInstances = ProductCard.CreateElements(Product.Instances);
+        this.ProductCardInstances = ProductCard.CreateCards(this.rootElement, Product.Instances);
 
         // Event delegation
         addEventListener('click', function(event){
@@ -21,6 +25,10 @@ class ProductList{
         });
     }
 
+    /**
+     * Attempts to find a product card instance that matches the specified product ID. Can return null if no match was found.
+     * @param {string} productID The ID of the product.
+     */
     static GetProductCardByProductID(productID){
         let productToReturn = null;
         
@@ -34,4 +42,7 @@ class ProductList{
     }
 }
 
+/**
+ * All product card instances.
+ */
 ProductList.ProductCardInstances = [];

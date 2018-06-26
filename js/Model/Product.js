@@ -16,6 +16,10 @@ class Product {
         this.img = info.img;
     }
 
+    /**
+     * Creates some test data based on the data in the produkter.json file.
+     * @param {function} creationCompleteCallback The function that will be called when the test data creation has been completed.
+     */
     static CreateTestData(creationCompleteCallback) {
         // Load from local products.json file
         HTTPRequestUtil.RequestAsync('GET', 'produkter.json', function (json) {
@@ -41,7 +45,6 @@ class Product {
 
             Product.SaveAll();
         });
-
     }
 
     /**
@@ -56,6 +59,10 @@ class Product {
         }
     }
 
+    /**
+     * Loads all products from local storage. Creates test data and loads it if no data were found in the local storage.
+     * @param {function} loadCompleteCallback The function that will be called when loading has been completed. 
+     */
     static LoadAll(loadCompleteCallback) {
         if (Storage.Local.get.ProductList) {
             Product.Instances = JSON.parse(Storage.Local.get.ProductList);
@@ -67,4 +74,7 @@ class Product {
     }
 }
 
+/**
+ * All loaded product instances.
+ */
 Product.Instances = {};
