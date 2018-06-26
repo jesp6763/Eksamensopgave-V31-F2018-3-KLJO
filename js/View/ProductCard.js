@@ -42,7 +42,7 @@ class ProductCard {
                             <button class="product-purchase-btn btn btn-outline-secondary" data-id="${product.id}">Bestil</button>
                         </div>
 
-                        <p class="col-sm p-0 text-right my-auto product-price">${product.price}</p>
+                        <p class="col-sm p-0 text-right my-auto product-price">${product.price}kr</p>
                     </div>
                 </div>
             </div>
