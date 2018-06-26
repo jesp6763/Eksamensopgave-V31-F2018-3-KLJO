@@ -1,14 +1,14 @@
 class HomePageController{
     static Setup(){
-        Checkout.Setup();
-
         Product.LoadAll(function(){
             ProductList.Setup();
+            Checkout.Setup();
             console.log("Loaded");
         });
-
+        
         window.addEventListener("unload", function(){
-            Product.SaveAllProductInstances();
+            Product.SaveAll();
+            Checkout.SaveCheckoutList();
         });
     }
 }
