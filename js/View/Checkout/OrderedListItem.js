@@ -5,10 +5,10 @@ class OrderedListItem {
      * @param {HTMLElement} element The element this instance belongs to.
      * @param {Product} product The product this item will get information from.
      */
-    constructor(element, product) {
+    constructor(element, productID, quantity) {
         // Setup variables
-        this.quantity = 1;
-        this.representedProduct = product.id;
+        this.quantity = quantity;
+        this.representedProduct = productID;
 
         this.rootElement = element;
         this.priceLabel = this.rootElement.querySelector('div.col-5 > p');
@@ -21,12 +21,19 @@ class OrderedListItem {
     IncrementQuantity(){
         this.quantity++;
         this.UpdateQuantityLabel();
+        this.UpdatePriceLabel();
+    }
+
+    DecrementQuantity(){
+        this.quantity--;
+        this.UpdateQuantityLabel();
+        this.UpdatePriceLabel();
     }
 
     UpdatePriceLabel(){
         let product = Product.Instances[this.representedProduct];
 
-        this.priceLabel.textContent = product.price + 'kr';
+        this.priceLabel.textContent = (product.price * this.quantity) + 'kr';
     }
 
     UpdateQuantityLabel() {
@@ -38,11 +45,11 @@ class OrderedListItem {
      * @param {HTMLElement} parent The element this item will be created in.
      * @param {Product} product The product to get information from.
      */
-    static Create(parent, product) {
+    static Create(parent, product, quantity) {
         parent.insertAdjacentHTML('afterbegin', this._GenerateHTMLElement(product));
 
         // Return the newly added order item
-        return new OrderedListItem(parent.getElementsByTagName('li')[0], product);
+        return new OrderedListItem(parent.getElementsByTagName('li')[0], product.id, quantity);
     }
 
     /**

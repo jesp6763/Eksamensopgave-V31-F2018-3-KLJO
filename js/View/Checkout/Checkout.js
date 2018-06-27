@@ -16,8 +16,8 @@ class Checkout{
         if(Storage.Session.get.CheckoutList){
             let loadedList = JSON.parse(Storage.Session.get.CheckoutList);
 
-            loadedList.forEach(itemID => {
-                this.Add(Product.Instances[itemID]);
+            loadedList.forEach(orderedItem => {
+                this.Add(Product.Instances[orderedItem.representedProduct], orderedItem.quantity);
             });
         }
 
@@ -27,7 +27,7 @@ class Checkout{
 
             if(clickedElement && clickedElement.matches('button.remove-order-btn')){
                 let productID = clickedElement.getAttribute('data-id');
-                Remove(productID);
+                Checkout.Remove(productID);
             }
         });
 
@@ -37,10 +37,11 @@ class Checkout{
     /**
      * Adds a product to the order list.
      * @param {Product} product The product to add to the list.
+     * @param {Number} quantity How many is being ordered. OPTIONAL, default value is 1.
      */
-    static Add(product){
+    static Add(product, quantity = 1){
         if(!this.ContainsProduct(product.id)){
-            this.OrderedProducts.push(OrderedListItem.Create(this.list, product));
+            this.OrderedProducts.push(OrderedListItem.Create(this.list, product, quantity));
         }
         else{
             this.OrderedProducts.forEach(item => {
@@ -60,12 +61,21 @@ class Checkout{
      * @param {string} productID The ID of the product to remove.
      */
     static Remove(productID){
-        this.list.removeChild();
-        Checkout.OrderedProducts.splice(product.id, 1);
+        let orderedItem = this.GetOrderedItemByProductID(productID);
         
-        this.UpdateTotalCost();
-        this.UpdateOrderCount();
-        this.UpdateCheckoutBtn();
+        if(orderedItem !== null){
+            if(orderedItem.quantity <= 1){
+                this.list.removeChild(orderedItem.rootElement);
+                this.OrderedProducts.splice(this.OrderedProducts.indexOf(orderedItem), 1);
+            }
+            else{
+                orderedItem.DecrementQuantity();
+            }
+
+            this.UpdateTotalCost();
+            this.UpdateOrderCount();
+            this.UpdateCheckoutBtn();
+        }
     }
 
     /**
@@ -74,15 +84,7 @@ class Checkout{
      * @param {string} productID The products ID to check for.
      */
     static ContainsProduct(productID){
-        let returnValue = false;
-
-        this.OrderedProducts.forEach(item => {
-            if(item.representedProduct === productID){
-                returnValue = true;
-            }
-        });
-
-        return returnValue;
+        return this.GetOrderedItemByProductID(productID) !== null;
     }
 
     /**
@@ -96,7 +98,7 @@ class Checkout{
             let productPrice = Product.Instances[orderedItem.representedProduct].price;
 
             // Add price to a local integer variable. 
-            totalPrice += productPrice;
+            totalPrice += productPrice * orderedItem.quantity;
         });
 
         // Set the total cost text to the value.
@@ -121,6 +123,18 @@ class Checkout{
         else{
             this.checkoutBtn.setAttribute('disabled', '');
         }
+    }
+
+    static GetOrderedItemByProductID(productID){
+        let returnValue = null;
+
+        this.OrderedProducts.forEach(orderedItem => {
+            if(orderedItem.representedProduct === productID){
+                returnValue = orderedItem;
+            }
+        });
+
+        return returnValue;
     }
 
     /**
