@@ -1,3 +1,6 @@
+/**
+ * A controller that manages the home page.
+ */
 class HomePageController{
     static Setup(){
         Product.LoadAll(function(){

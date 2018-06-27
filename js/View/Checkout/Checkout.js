@@ -6,13 +6,27 @@ class Checkout{
      * Sets up the checkout element.
      */
     static Setup(){
+        this._InitializeVariables();
+        this._LoadOrderedItemsFromSession();
+        this._InitializeOrderListEventDelegation();
+        this.UpdateCheckoutBtn();
+    }
+
+    /**
+     * Initializes the needed class variables.
+     */
+    static _InitializeVariables(){
         this.rootElement = document.querySelector('.checkout');
         this.list = this.rootElement.querySelector('#checkout-list');
         this.checkoutBtn = this.list.querySelector('button');
         this.orderCount = this.rootElement.querySelector('.checkout p.badge');
         this.totalLabel = this.list.querySelector('li > div > div:nth-child(2) > p');
-        
-        // Load checkout items from session
+    }
+
+    /**
+     * Loads all ordered items from the session, if any.
+     */
+    static _LoadOrderedItemsFromSession(){
         if(Storage.Session.get.CheckoutList){
             let loadedList = JSON.parse(Storage.Session.get.CheckoutList);
 
@@ -20,8 +34,13 @@ class Checkout{
                 this.Add(Product.Instances[orderedItem.representedProduct], orderedItem.quantity);
             });
         }
+    }
 
-        // Setup event delegation for checkout-list
+    /**
+     * Sets up an event delegation for the order list.
+     * When a remove button has been clicked on, it will call the remove method on the ordered item the button belongs to.
+     */
+    static _InitializeOrderListEventDelegation(){
         this.list.addEventListener('click', function(event){
             let clickedElement = event.target;
 
@@ -30,8 +49,6 @@ class Checkout{
                 Checkout.Remove(productID);
             }
         });
-
-        this.UpdateCheckoutBtn();
     }
 
     /**
@@ -125,6 +142,11 @@ class Checkout{
         }
     }
 
+    /**
+     * Returns an ordered item that represents the specified product ID.
+     * Returns null if no match were found.
+     * @param {string} productID The ID of the product.
+     */
     static GetOrderedItemByProductID(productID){
         let returnValue = null;
 

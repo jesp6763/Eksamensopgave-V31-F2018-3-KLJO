@@ -11,6 +11,10 @@ class ProductCard {
         this.representedProduct = product.id;
     }
 
+    /**
+     * Called when the order button has been clicked.
+     * Adds the product to the order list.
+     */
     OrderClickHandler(){
         Checkout.Add(Product.Instances[this.representedProduct]);
     }
