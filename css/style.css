@@ -26,3 +26,7 @@ body > section:nth-of-type(1) > div > p{
 .checkout > .row p{
     font-size: 1.2em;
 }
+
+#checkout-list div.col-8.pl-2 > img{
+    width: 32px;
+}

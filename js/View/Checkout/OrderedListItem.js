@@ -1,3 +1,6 @@
+/**
+ * Represents an item view for the checkout order list.
+ */
 class OrderedListItem {
     /**
      * Initializes a new instance of the OrderedListItem.
@@ -11,26 +14,26 @@ class OrderedListItem {
         this.representedProduct = productID;
 
         this.rootElement = element;
-        this.priceLabel = this.rootElement.querySelector('div.col-5 > p');
-        this.quantityLabel = this.rootElement.querySelector('div.col-6 > p span');
+        this.priceLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-3 > p');
+        this.quantityLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-8.pl-2 > p > span');
 
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
     }
 
-    IncrementQuantity(){
+    IncrementQuantity() {
         this.quantity++;
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
     }
 
-    DecrementQuantity(){
+    DecrementQuantity() {
         this.quantity--;
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
     }
 
-    UpdatePriceLabel(){
+    UpdatePriceLabel() {
         let product = Product.Instances[this.representedProduct];
 
         this.priceLabel.textContent = (product.price * this.quantity) + 'kr';
@@ -60,16 +63,25 @@ class OrderedListItem {
         return `
         <li class="list-group-item checkout-list-item">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-8 pl-2">
+                                    <img class="h-100 rounded-circle float-left mr-2" src="img/${product.img}">
                                     <p class="font-weight-bold my-1">${product.name} (x<span>${this.quantity}</span>)</p>
                                 </div>
 
-                                <div class="col-5">
+                                <div class="col-3">
                                     <p class="text-right my-1">${product.price}kr</p>
                                 </div>
 
                                 <div class="col-1 p-0">
                                     <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn" data-id="${product.id}">&times;</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 font-weight-light">
+                                    <p>
+                                    ${product.description}
+                                    </p>
                                 </div>
                             </div>
                         </li>
