@@ -13,7 +13,7 @@ class ProductList{
         this.ProductCardInstances = ProductCard.CreateCards(this.rootElement, Product.Instances);
 
         // Event delegation
-        addEventListener('click', function(event){
+        this.rootElement.addEventListener('click', function(event){
             let clickedElement = event.target;
 
             if(clickedElement && clickedElement.matches('button.product-purchase-btn')){

@@ -49,7 +49,7 @@ class ProductCard {
 
                     <div class="row container pr-0">
                         <div class="col-6 p-0">
-                            <button class="product-purchase-btn btn btn-outline-secondary" data-id="${product.id}">Bestil</button>
+                            <button class="product-purchase-btn btn btn-outline-secondary" type="button" data-id="${product.id}">Bestil</button>
                         </div>
 
                         <p class="col-6 p-0 text-right my-auto product-price">${product.price}kr</p>
