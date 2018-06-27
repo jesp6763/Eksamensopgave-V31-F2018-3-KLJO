@@ -14,8 +14,18 @@ class OrderedListItem {
         this.representedProduct = productID;
 
         this.rootElement = element;
-        this.priceLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-3 > p');
+        this.priceLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-4 > p');
         this.quantityLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-8.pl-2 > p > span');
+
+        let self = this;
+
+        this.rootElement.addEventListener('mouseover', function(){
+            element.querySelector('button').classList.remove('d-none');
+        });
+
+        this.rootElement.addEventListener('mouseleave', function(){
+            element.querySelector('button').classList.add('d-none');
+        });
 
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
@@ -68,12 +78,9 @@ class OrderedListItem {
                                     <p class="font-weight-bold my-1">${product.name} (x<span>${this.quantity}</span>)</p>
                                 </div>
 
-                                <div class="col-3">
-                                    <p class="text-right my-1">${product.price}kr</p>
-                                </div>
-
-                                <div class="col-1 p-0">
-                                    <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn rounded-0" data-id="${product.id}">&times;</button>
+                                <div class="col-4 d-flex flex-row justify-content-end">
+                                    <p class="my-1">${product.price}kr</p>
+                                    <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn rounded-0 d-none ml-2" data-id="${product.id}">&times;</button>
                                 </div>
                             </div>
 
