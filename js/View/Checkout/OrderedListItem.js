@@ -61,7 +61,7 @@ class OrderedListItem {
      */
     static _GenerateHTMLElement(product) {
         return `
-        <li class="list-group-item checkout-list-item">
+        <li class="list-group-item checkout-list-item fade-in">
                             <div class="row">
                                 <div class="col-8 pl-2">
                                     <img class="h-100 rounded-circle float-left mr-2" src="img/${product.img}">
@@ -73,7 +73,7 @@ class OrderedListItem {
                                 </div>
 
                                 <div class="col-1 p-0">
-                                    <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn" data-id="${product.id}">&times;</button>
+                                    <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn rounded-0" data-id="${product.id}">&times;</button>
                                 </div>
                             </div>
 
