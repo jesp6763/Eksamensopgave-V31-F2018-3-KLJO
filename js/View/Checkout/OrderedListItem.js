@@ -79,7 +79,7 @@ class OrderedListItem {
 
                             <div class="row">
                                 <div class="col-12 font-weight-light">
-                                    <p>
+                                    <p class="my-2">
                                     ${product.description}
                                     </p>
                                 </div>
