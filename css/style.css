@@ -31,6 +31,10 @@ body > section:nth-of-type(1) > div > p{
     width: 32px;
 }
 
+.remove-order-btn{
+    font-size: 1.1em;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
