@@ -8,7 +8,7 @@ class HomePageController{
         
         window.addEventListener("unload", function(){
             Product.SaveAll();
-            Checkout.SaveCheckoutList();
+            Checkout.SaveOrderedItems();
         });
     }
 }
