@@ -6,55 +6,86 @@ class OrderedListItem {
      * Initializes a new instance of the OrderedListItem.
      * If you want to create a new instance and at the same time an element to the DOM, use the static Create method instead.
      * @param {HTMLElement} element The element this instance belongs to.
-     * @param {Product} product The product this item will get information from.
+     * @param {Number} productID The ID of the product that is representing this view.
+     * @param {Number} quantity The amount of the product is ordered.
      */
     constructor(element, productID, quantity) {
-        // Setup variables
-        this.quantity = quantity;
-        this.representedProduct = productID;
-
-        this.rootElement = element;
-        this.priceLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-4 > p');
-        this.quantityLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-8.pl-2 > p > span');
-
-        let self = this;
-
-        this.rootElement.addEventListener('mouseover', function(){
-            element.querySelector('button').classList.remove('d-none');
-        });
-
-        this.rootElement.addEventListener('mouseleave', function(){
-            element.querySelector('button').classList.add('d-none');
-        });
+        this._InitializeClassVariables(element, productID, quantity);
+        this._InitializeHoverEvents();
 
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
     }
 
+    /**
+     * Initializes all class variables.
+     * @param {HTMLElement} element The element this instance belongs to.
+     * @param {Number} productID The ID of the product that is representing this view.
+     * @param {Number} quantity The amount of the product is ordered.
+     */
+    _InitializeClassVariables(element, productID, quantity){
+        /* Data */
+        this.quantity = quantity;
+        this.representedProduct = productID;
+
+        /* Elements */
+        this.rootElement = element;
+        this.priceLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-4 > p');
+        this.quantityLabel = this.rootElement.querySelector('div:nth-child(1) > div.col-8.pl-2 > p > span');
+    }
+
+    /**
+     * Adds a mouseover, and mouseleave event listener to the remove button.
+     */
+    _InitializeHoverEvents(){
+        let element = this.rootElement;
+        
+        // Show remove button when order item is hovered over.
+        this.rootElement.addEventListener('mouseover', function(){
+            element.querySelector('button').classList.remove('d-none');
+        });
+
+        // Hide remove button when mouse leaves the order item.
+        this.rootElement.addEventListener('mouseleave', function(){
+            element.querySelector('button').classList.add('d-none');
+        });
+    }
+
+    /**
+     * Increments the quantity, and refreshes the view.
+     */
     IncrementQuantity() {
         this.quantity++;
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
     }
 
+    /**
+     * Decrements the quantity, and refreshes the view.
+     */
     DecrementQuantity() {
         this.quantity--;
         this.UpdateQuantityLabel();
         this.UpdatePriceLabel();
     }
 
+    /**
+     * Refreshes the price label.
+     */
     UpdatePriceLabel() {
         let product = Product.Instances[this.representedProduct];
-
         this.priceLabel.textContent = (product.price * this.quantity) + 'kr';
     }
 
+    /**
+     * Refreshes the quantity label.
+     */
     UpdateQuantityLabel() {
         this.quantityLabel.textContent = this.quantity;
     }
 
     /**
-     * 
+     * Creates a order item view for a specified product.
      * @param {HTMLElement} parent The element this item will be created in.
      * @param {Product} product The product to get information from.
      */
@@ -80,7 +111,7 @@ class OrderedListItem {
 
                                 <div class="col-4 d-flex flex-row justify-content-end">
                                     <p class="my-1">${product.price}kr</p>
-                                    <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn rounded-0 d-none ml-2" data-id="${product.id}">&times;</button>
+                                    <button type="button" class="btn btn-danger btn-sm float-right remove-order-btn rounded-0 d-none ml-2 font-weight-bold py-0" data-id="${product.id}">&times;</button>
                                 </div>
                             </div>
 
