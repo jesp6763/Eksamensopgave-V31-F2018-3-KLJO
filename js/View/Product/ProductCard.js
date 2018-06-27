@@ -40,7 +40,7 @@ class ProductCard {
      */
     static _GenerateHTMLElement(product) {
         return `
-        <article class="col-12 col-sm-6 mb-4 product-list-item">
+        <article class="col-12 col-sm-6 mb-4 product-list-item fade-in">
             <div class="card">
                 <img class="card-img-top" src="img/${product.img}" alt="coffee picture">
                 <div class="card-body">
